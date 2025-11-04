@@ -1,19 +1,66 @@
-/* General Body Styles */
+/* ---------------------------------- */
+/*          Global Styles             */
+/* ---------------------------------- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     line-height: 1.6;
     background-color: #f4f7f9;
     color: #333;
     margin: 0;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------------------------------- */
+/*          Layout & Containers       */
+/* ---------------------------------- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+main, .dashboard-container, .levantamiento-container {
     padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Auth page specific container */
+.auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* Main container */
-main {
+.auth-container main {
     width: 100%;
     max-width: 400px;
     background: #fff;
@@ -22,20 +69,9 @@ main {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h1 {
-    color: #2c3e50;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 25px;
-}
+/* ---------------------------------- */
+/*          Component Styles          */
+/* ---------------------------------- */
 
 /* Form Styling */
 .form-group {
@@ -57,34 +93,167 @@ input[type="password"] {
     box-sizing: border-box; /* Important for padding */
 }
 
-/* Button Styling */
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #3498db;
-    color: white;
+/* Button & Link Styling */
+button, .button-primary, .button-secondary {
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
 }
 
-button:hover {
+.button-primary {
+    background-color: #3498db;
+    color: white;
+}
+.button-primary:hover {
     background-color: #2980b9;
+    text-decoration: none;
 }
 
-#logout-button {
-    background-color: #e74c3c;
+.button-secondary {
+    background-color: #ecf0f1;
+    color: #34495e;
+    border: 1px solid #bdc3c7;
+}
+.button-secondary:hover {
+    background-color: #bdc3c7;
+    text-decoration: none;
 }
 
-#logout-button:hover {
-    background-color: #c0392b;
+/* Auth Page Buttons */
+#auth-section button {
+    width: 100%;
+}
+
+/* Header Buttons */
+.app-header button, .app-header a {
+    padding: 8px 15px;
+    font-size: 14px;
 }
 
 
-/* Utility Classes */
+/* ---------------------------------- */
+/*          Dashboard Styles          */
+/* ---------------------------------- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+.project-card h3 {
+    margin-bottom: 15px;
+}
+
+.project-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.status-completed { color: #2ecc71; font-weight: bold; }
+.status-inprogress { color: #f39c12; font-weight: bold; }
+.status-pending { color: #95a5a6; font-weight: bold; }
+
+.card-actions {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+
+/* ---------------------------------- */
+/*        Levantamiento Styles        */
+/* ---------------------------------- */
+.levantamiento-container {
+    display: flex;
+    gap: 30px;
+}
+
+.levantamiento-nav {
+    flex: 0 0 250px; /* Do not grow, do not shrink, base width 250px */
+}
+
+.levantamiento-nav h2 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.levantamiento-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.levantamiento-nav li a {
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.levantamiento-nav li.active a {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+.question-area {
+    flex: 1;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.question {
+    margin-bottom: 25px;
+}
+
+.question label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.question select,
+.question textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.question-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+
+/* ---------------------------------- */
+/*          Utility Classes           */
+/* ---------------------------------- */
 .hidden {
     display: none;
 }
@@ -93,4 +262,29 @@ button:hover {
     color: #e74c3c;
     text-align: center;
     margin-top: 15px;
+}
+
+
+/* ---------------------------------- */
+/*          Responsive Design         */
+/* ---------------------------------- */
+@media (max-width: 768px) {
+    .levantamiento-container {
+        flex-direction: column;
+    }
+
+    .levantamiento-nav {
+        flex-basis: auto;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    .dashboard-header .button-primary {
+        width: 100%;
+    }
 }
