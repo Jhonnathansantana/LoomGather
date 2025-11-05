@@ -38,7 +38,7 @@ export async function getCurrentUser() {
  * @param {function} callback - The function to call when the auth state changes.
  */
 export function onAuthStateChange(callback) {
-    supabase.auth.onAuthStateChanged((event, session) => {
+    supabase.auth.onAuthStateChange((event, session) => {
         callback(session ? session.user : null);
     });
 }

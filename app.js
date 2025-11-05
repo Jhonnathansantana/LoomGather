@@ -15,39 +15,55 @@ const errorMessage = document.getElementById('error-message');
 function updateUserInterface(user) {
     if (user) {
         // User is logged in
-        authSection.classList.add('hidden');
-        protectedSection.classList.remove('hidden');
-        errorMessage.textContent = '';
+        // Redirect to dashboard
+        window.location.href = 'dashboard.html';
     } else {
         // User is logged out
-        authSection.classList.remove('hidden');
-        protectedSection.classList.add('hidden');
+        if (authSection) authSection.classList.remove('hidden');
+        if (protectedSection) protectedSection.classList.add('hidden');
     }
 }
 
 // Event Listener for the Login Form
-loginForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+if (loginForm) {
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
 
-    const { error } = await signInUser(email, password);
+        const { error } = await signInUser(email, password);
 
-    if (error) {
-        errorMessage.textContent = `Error: ${error.message}`;
-    } else {
-        errorMessage.textContent = '';
-        // The onAuthStateChange listener will handle the UI update
-    }
-});
+        if (error) {
+            if (errorMessage) errorMessage.textContent = `Error: ${error.message}`;
+        } else {
+            if (errorMessage) errorMessage.textContent = '';
+            // The onAuthStateChange listener will handle the UI update
+        }
+    });
+}
 
 // Event Listener for the Logout Button
-logoutButton.addEventListener('click', async () => {
-    await signOutUser();
-    // The onAuthStateChange listener will handle the UI update
-});
+if (logoutButton) {
+    logoutButton.addEventListener('click', async () => {
+        await signOutUser();
+        window.location.href = 'index.html';
+    });
+}
 
 // Initial check and listener for authentication state changes
 onAuthStateChange(user => {
-    updateUserInterface(user);
+    // This logic needs to be smart about which page we are on.
+    const currentPage = window.location.pathname.split('/').pop();
+
+    if (user) {
+        // If the user is logged in, they should not be on the login page.
+        if (currentPage === 'index.html' || currentPage === '') {
+            window.location.href = 'dashboard.html';
+        }
+    } else {
+        // If the user is not logged in, they should be on the login page.
+        if (currentPage !== 'index.html' && currentPage !== '') {
+            window.location.href = 'index.html';
+        }
+    }
 });
