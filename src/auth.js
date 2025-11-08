@@ -12,7 +12,7 @@ export async function signInUser(email, password) {
         email: email,
         password: password,
     });
-    return { session: data.session, error };
+    return { data, error };
 }
 
 /**
